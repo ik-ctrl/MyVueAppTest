@@ -183,25 +183,26 @@ let app = new Vue({
         }
     }
 })
-let audio = new Audio('audio/soundtrack.mp3');
-let audioBtn = document.querySelector('.btn_sound');
-let audioIcon = document.querySelector('.btn_sound i');
-audio.muted = true;
-audio.autoplay = true;
-audio.volume = 0.1;
 
-audio.addEventListener('loadmetadata', function(){
-    audio.currentTime = 0 + Math.random()* (audio.duration+1-0);
-});
+// let audio = new Audio('audio/soundtrack.mp3');
+// let audioBtn = document.querySelector('.btn_sound');
+// let audioIcon = document.querySelector('.btn_sound i');
+// audio.muted = true;
+// audio.autoplay = true;
+// audio.volume = 0.1;
 
-audioBtn.addEventListener('click', function(){ 
-    if(audio.muted) {
-        audio.muted=false;
-        audioIcon.classList.add('fa-volume-up');
-        audioIcon.classList.remove('fa-volume-off');
-    } else if(!audio.muted) {
-        audio.muted=true;
-        audioIcon.classList.add('fa-volume-off');
-        audioIcon.classList.remove('fa-volume-up');
-    }
-})
+// audio.addEventListener('loadmetadata', function(){
+//     audio.currentTime = 0 + Math.random()* (audio.duration+1-0);
+// });
+
+// audioBtn.addEventListener('click', function(){ 
+//     if(audio.muted) {
+//         audio.muted=false;
+//         audioIcon.classList.add('fa-volume-up');
+//         audioIcon.classList.remove('fa-volume-off');
+//     } else if(!audio.muted) {
+//         audio.muted=true;
+//         audioIcon.classList.add('fa-volume-off');
+//         audioIcon.classList.remove('fa-volume-up');
+//     }
+// })
