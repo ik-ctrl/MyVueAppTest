@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Хто я?</title>
+</head>
+
+<body>
+    <div class="main">
+        <!-- основной экран -->
+        <div class="app" v-show="showMain">
+            <div class="app__header">
+                <img src="img/logo.png" alt="тут лого" class="app__logo">
+            </div>
+
+            <div class="app__body">
+
+                <button class="app__btn" @click="goToQuestions">
+                    <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+                    <div class="app_btn_text">Начать</div>
+                </button>
+
+                <button class="app__btn" @click="goToAchivments">
+                    <i class="fa fa-trophy" aria-hidden="true"></i>
+                    <div class="app_btn_text">Достижение</div>
+                </button>
+
+                <button class="app__btn" @click="goToSocial">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <div class="app_btn_text">Об авторе</div>
+                </button>
+
+                <button class="app__btn btn_sound">
+                    <i class="fa fa-volume-off" aria-hidden="true"></i>
+                    <div class="app_btn_text">Звук</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- ачивки -->
+        <div class="app achivments" v-show="showAchivments">
+            <div class="app__body">
+                <div class="app__body_inner">
+                    <h2 class="app_body_title">
+                        <i class="fa fa-trophy" aria-hidden="true"></i>
+                        Достижение
+                    </h2>
+                    <div class="app__body_top">
+                        <div class="app__card">
+                            <div class="app__card_text">Счёт</div>
+                            <div class="app__card_count">{{totalScore}}</div>
+                        </div>
+                        <div class="app__card">
+                            <div class="app__card_text">Открыто рас</div>
+                            <div class="app__card_count">{{openedRace}}</div>
+                        </div>
+                        <div class="app__card">
+                            <div class="app__card_text">Всего игр</div>
+                            <div class="app__card_count">{{totalGames}}</div>
+                        </div>
+                        <div class="app__card">
+                            <div class="app__card_text">Любимая раса</div>
+                            <div class="app__card_count">{{favoriteRace}}</div>
+                        </div>
+                    </div>
+                    <div class="app__body_middle">
+                        <div class="app__result" v-for="(race,key) in results" @click="goToResults(key)"
+                            v-show="showResultRace[key]">
+                            <div class="app__result_score">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <div class="app__result_count">
+                                    {{race.points}}
+                                </div>
+                            </div>
+                            <div class="app__result_name">{{race.name}}</div>
+                            <div class="app__result_amount">{{totalGame[key]}}</div>
+                        </div>
+                    </div>
+                    <div class="app__body_bottom">
+                        <button class="app__btn btn__back btn_achivment" @click="goToMain">
+                            <i class="fa fa-reply" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- вопросы -->
+        <div class="app" v-show="showQuations">
+            <div class="app__header">
+                <div class="app__header_inner">
+                    <div class="app__count"># {{ number+1 }}</div>
+                    <div class="app__text">{{ questions[number][0] }}</div>
+                </div>
+            </div>
+            <div class="app__body" v-for="(answer,i) in questions[number][1]"
+                @click="goNextQuestions(questions[number][2][i])">
+                <button class="app__btn">
+                    <div class="app__btn_text">{{ answer }}</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- ссылки -->
+        <div class="app" v-show="showSocial">
+            <div class="app__body">
+                <a target="_blank" href="#" class="app__btn" aria-hidden="">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <div class="app__btn_text">Instagram</div>
+                </a>
+                <a target="_blank" href="#" class="app__btn" aria-hidden="">
+                    <i class="fa fa-youtube" aria-hidden="true"></i>
+                    <div class="app__btn_text">Instagram</div>
+                </a>
+                <a target="_blank" href="#" class="app__btn" aria-hidden="">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <div class="app__btn_text">Instagram</div>
+                </a>
+                <a target="_blank" href="#" class="app__btn" aria-hidden="">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <div class="app__btn_text">Instagram</div>
+                </a>
+                <a target="_blank" href="#" class="app__btn" aria-hidden="">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <div class="app__btn_text">Instagram</div>
+                </a>
+                <button class="app__btn btn__back" @click="goToMain">
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- результаты -->
+        <div class="app results" data-race="terran" v-show="showResult" v-bind:data-race="resultRace">
+            <div class="app__body">
+                <div class="app__result_inner">
+                    <div class="result__title">{{results[resultRace].name}}</div>
+                    <div class="result__img">
+                        <img v-bind:src="'img/'+resultRace+'_logo.png'" alt="что-то пошло не так">
+                    </div>
+                    <div class="results__text_box">
+                        <p class="results__text">{{results[resultRace].description}} </p>
+                        <p class="results__quote">{{ results[resultRace].quote1 }}</p>
+                        <p class="results__quote">{{ results[resultRace].quote2 }}</p>
+                        <p class="results__author">{{ results[resultRace].author }}</p>
+                    </div>
+                    <div v-bind:class="'app__btn btn__back btn__'+resultRace" @click="goToAchivments">
+                        <i class="fa fa-reply" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/const.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
