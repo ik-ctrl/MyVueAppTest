@@ -36,14 +36,14 @@ let app = new Vue({
     methods: {
         goToMain() {
             this.showSocial = false;
-            this.howAchivments = false;
+            this.showAchivments = false;
             this.showQuations = false;
             this.showResult = false;
             this.showMain = true;
         },
         goToSocial() {
             this.showSocial = true;
-            this.howAchivments = false;
+            this.showAchivments = false;
             this.showQuations = false;
             this.showResult = false;
             this.showMain = false;
@@ -68,7 +68,7 @@ let app = new Vue({
                 'terran': 0,
             }
             this.showSocial = false;
-            this.howAchivments = false;
+            this.showAchivments = false;
             this.showQuations = true;
             this.showResult = false;
             this.showMain = false;
