@@ -35,22 +35,22 @@ let app = new Vue({
     },
     methods: {
         goToMain() {
-            this.showSocial = false;
+            // this.showSocial = false;
             this.showAchivments = false;
             this.showQuations = false;
             this.showResult = false;
             this.showMain = true;
         },
-        goToSocial() {
-            this.showSocial = true;
-            this.showAchivments = false;
-            this.showQuations = false;
-            this.showResult = false;
-            this.showMain = false;
-        },
+        // goToSocial() {
+        //     this.showSocial = true;
+        //     this.showAchivments = false;
+        //     this.showQuations = false;
+        //     this.showResult = false;
+        //     this.showMain = false;
+        // },
         goToAchivments() {
             if (this.totalGames > 0) {
-                this.showSocial = false;
+                // this.showSocial = false;
                 this.showAchivments = true;
                 this.showQuations = false;
                 this.showResult = false;
